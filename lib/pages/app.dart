@@ -24,8 +24,11 @@ class _AppState extends State<App> {
     /// context is required, other params is optional.
     if (pathList == null) {
       pathList = await PhotoManager.getAssetPathList();
-      print(pathList.join(","));
     }
+    print(pathList);
+    print(pathList.join(","));
+    // var list=await pathList[0].assetList;
+    // print(list);
     List<AssetEntity> imgList = await PhotoPicker.pickAsset(
       // BuildContext required
       context: context,
@@ -81,6 +84,7 @@ class _AppState extends State<App> {
         var file = await e.file;
         r.add(file.absolute.path);
       }
+      print(r.join(","));
       List<AssetEntity> preview = [];
       preview.addAll(imgList);
       Navigator.push(context,
