@@ -29,6 +29,7 @@ dependencies:
   dio: 3.0.8
   flutter_snake_navigationbar: ^0.2.0
   flutter_screenutil: ^0.7.0
+  photo: ^0.4.5+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

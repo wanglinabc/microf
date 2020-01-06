@@ -3,7 +3,7 @@ import 'package:microf/pages/splash.dart';
 import 'package:fluro/fluro.dart';
 import 'package:microf/route/router.dart';
 import 'package:microf/route/application.dart';
-import 'package:microf/util/sharedPrd.dart';
+import 'package:microf/util/spUtil.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,15 +14,12 @@ void main() {
   runApp(MyApp());
 }
 
-final GlobalKey navigatorKey = new GlobalKey(); //
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
