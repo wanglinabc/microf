@@ -51,8 +51,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     Screen.init(context);
-    print(Screen.screenWidth);
-    print(Screen.screenHeight);
+    print(Screen.screenWidthDp);
+    print(Screen.screenHeightDp);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(

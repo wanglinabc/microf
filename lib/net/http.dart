@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:microf/config/config.dart';
+import 'package:microf/components/dialog/load.dart';
+import 'package:flutter/material.dart';
 
 class Http {
   static Dio handle;
@@ -14,6 +16,13 @@ class Http {
       handle = Dio(option);
       handle.interceptors
           .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
+        showDialog(
+            context: options.extra['ctx'],
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return Loading();
+            });
+
         // 在请求被发送之前做一些事情
         return options; //continue
         // 如果你想完成请求并返回一些自定义数据，可以返回一个`Response`对象或返回`dio.resolve(data)`。
@@ -29,6 +38,7 @@ class Http {
         return response; // continue
       }, onError: (DioError e) async {
         // 当请求失败时做一些预处理
+        Navigator.of(e.request.extra['ctx']).pop(); //关闭弹窗
         print(e.type);
         return e; //continue
       }));

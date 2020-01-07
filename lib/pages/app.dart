@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 // import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:microf/util/screenUtil.dart';
 import 'package:photo/photo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:microf/components/photo/preview.dart';
+import 'package:microf/components/dialog/load.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);
@@ -14,9 +16,8 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int _selectedItemPosition = 0;
   int _index = 0;
-
+  int _selectedItemPosition = 0;
   void _pickAsset(
       {List<AssetPathEntity> pathList, PickType type: PickType.all}) async {
     /// context is required, other params is optional.
@@ -93,6 +94,18 @@ class _AppState extends State<App> {
     setState(() {});
   }
 
+  void test() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Loading();
+        });
+    Timer(Duration(seconds: 1), () {
+      Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -101,9 +114,9 @@ class _AppState extends State<App> {
             index: _selectedItemPosition,
             children: <Widget>[
               Center(
-                child: Text(
-                  '首页',
-                  style: TextStyle(color: Colors.black),
+                child: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: test,
                 ),
               ),
               Center(
@@ -139,6 +152,8 @@ class _AppState extends State<App> {
                         _selectedItemPosition = i > 2 ? i - 1 : i;
                         _index = i;
                       });
+                    } else {
+                      _pickAsset();
                     }
                   },
                   items: [
